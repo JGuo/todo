@@ -10,12 +10,16 @@ import UIKit
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var tableView: UITableView!
     
     var todos : NSArray!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        scrollView.contentSize = CGSize(width: 3 * self.view.frame.width, height: self.view.frame.height)        
         
         todos = [0, 1, 2, 3, 4, 5, 6, 7]
     }
