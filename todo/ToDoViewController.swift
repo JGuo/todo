@@ -24,9 +24,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.todocellview", forIndexPath: indexPath) as! ToDoTableViewCell
         
-        let multiplier = 255.0 / CGFloat(todos.count)
+        let multiplier = 255.0 / CGFloat(todos.count + 5)
         
-        cell.backgroundColor = UIColor(red: CGFloat(indexPath.row) * multiplier / 255.0, green: CGFloat(indexPath.row) * multiplier / 255.0, blue: CGFloat(indexPath.row) * multiplier / 255.0, alpha: 1.0)
+        cell.backgroundColor = UIColor(red: CGFloat(indexPath.row + 5) * multiplier / 255.0, green: 0, blue: 0, alpha: 1.0)
 
         return cell
     }
