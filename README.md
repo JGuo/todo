@@ -2,7 +2,7 @@
 
 **Project Todo**
 
-Submitted by: **Jisi Guo & Madelyn Lee**
+Submitted by: **Jisi Guo & Madelyn Lee & Vishay Nihalani**
 
 Time spent: **8** hours spent in total
 
