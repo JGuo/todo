@@ -19,9 +19,28 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        scrollView.contentSize = CGSize(width: 3 * self.view.frame.width, height: self.view.frame.height)        
+        scrollView.contentSize = CGSize(width: 3 * 375, height: self.view.frame.height)
         
-        todos = [0, 1, 2, 3, 4, 5, 6, 7]
+        todos = [   "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "19"]
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -31,6 +50,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         let multiplier = 255.0 / CGFloat(todos.count + 5)
         
         cell.backgroundColor = UIColor(red: CGFloat(indexPath.row + 5) * multiplier / 255.0, green: 0, blue: 0, alpha: 1.0)
+        
+        cell.textLabel?.text = todos[indexPath.row] as! String
 
         return cell
     }
