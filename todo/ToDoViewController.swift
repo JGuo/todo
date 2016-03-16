@@ -14,12 +14,20 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var leftCard: UIView!
+    @IBOutlet weak var rightCard: UIView!
+    
     var todos : NSArray!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         scrollView.contentSize = CGSize(width: 3 * 375, height: self.view.frame.height)
+        
+        // border radius
+        leftCard.layer.cornerRadius = 10;
+        tableView.layer.cornerRadius = 10;
+        rightCard.layer.cornerRadius = 10;
         
         todos = [   "0",
                     "1",
