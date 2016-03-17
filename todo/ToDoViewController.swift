@@ -51,14 +51,15 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         var cell : UITableViewCell!
         
         if (tableView == todoTableView) {
             let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.todocellview", forIndexPath: indexPath) as! ToDoTableViewCell
             
-            let multiplier = 255.0 / CGFloat(todos.count + 5)
+            let multiplier = 1.0 / CGFloat(todos.count + 5)
             
-            cell.backgroundColor = UIColor(red: CGFloat(indexPath.row + 5) * multiplier / 255.0, green: 0, blue: 0, alpha: 1.0)
+            cell.backgroundColor = UIColor(red: 0, green: 0, blue: 255, alpha: CGFloat(indexPath.row + 5) * multiplier / 1.0)
             
             cell.textField.text = todos[indexPath.row] as! String
 
@@ -66,9 +67,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if (tableView == doingTableView) {
             let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.doingcellview", forIndexPath: indexPath) as! DoingTableViewCell
             
-            let multiplier = 255.0 / CGFloat(todos.count + 5)
+            let multiplier = 1.0 / CGFloat(todos.count + 5)
             
-            cell.backgroundColor = UIColor(red: 0, green: CGFloat(indexPath.row + 5) * multiplier / 255.0, blue: 0, alpha: 1.0)
+            cell.backgroundColor = UIColor(red:1.0, green:0.75, blue:0.72, alpha: CGFloat(indexPath.row + 5) * multiplier / 1.0)
             
             cell.textField.text = doing[indexPath.row] as! String
             
