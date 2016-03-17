@@ -16,10 +16,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var todoTableView: UITableView!
     @IBOutlet weak var doingTableView: UITableView!
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var leftCard: UIView!
     @IBOutlet weak var rightCard: UIView!
     
     @IBOutlet weak var todoTab: UIButton!
@@ -36,12 +32,11 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view, typically from a nib.
         
         containerScrollView.delegate = self
-        containerScrollView.contentSize = CGSize(width: 3 * 375, height: self.view.frame.height)
-        scrollView.contentSize = CGSize(width: 3 * 375, height: 586)
+        containerScrollView.contentSize = CGSize(width: 3 * 375, height: 568)
         
         // border radius
-//        leftCard.layer.cornerRadius = 10;
-//        tableView.layer.cornerRadius = 10;
+        todoTableView.layer.cornerRadius = 10;
+        doingTableView.layer.cornerRadius = 10;
         rightCard.layer.cornerRadius = 10;
         
         todos = [   "Learn",
@@ -141,7 +136,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func tapTodoTab(sender: UIButton) {
         print("tapped on todo tab")
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.scrollView.contentOffset.x = self.leftCard.frame.origin.x - 38
+            self.containerScrollView.contentOffset.x = self.todoTableView.frame.origin.x - 38
         })
         todoTab.selected = true
         doingTab.selected = false
@@ -152,7 +147,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func tapDoingTab(sender: UIButton) {
         print("tapped on doing tab")
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.scrollView.contentOffset.x = self.tableView.frame.origin.x - 38
+            self.containerScrollView.contentOffset.x = self.doingTableView.frame.origin.x - 38
         })
         todoTab.selected = false
         doingTab.selected = true
@@ -163,7 +158,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func tapDoneTab(sender: UIButton) {
         print("tapped on done tab")
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.scrollView.contentOffset.x = self.rightCard.frame.origin.x - 38
+            self.containerScrollView.contentOffset.x = self.rightCard.frame.origin.x - 38
         })
         todoTab.selected = false
         doingTab.selected = false
@@ -176,11 +171,11 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         let velocity = sender.velocityInView(view)
         
         if (sender.state == UIGestureRecognizerState.Began) {
-            initialScrollViewContentOffset = scrollView.contentOffset
+            initialScrollViewContentOffset = containerScrollView.contentOffset
             
         }  else if (sender.state == UIGestureRecognizerState.Changed) {
             print(translation)
-            self.scrollView.contentOffset.x = initialScrollViewContentOffset.x - (translation.x)
+            self.containerScrollView.contentOffset.x = initialScrollViewContentOffset.x - (translation.x)
             
         }  else if (sender.state == UIGestureRecognizerState.Ended) {
             print(velocity)
