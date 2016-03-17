@@ -13,7 +13,6 @@ let ROW_HEIGHT = CGFloat(70)
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var containerScrollView: UIScrollView!
-    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var todoTableView: UITableView!
     @IBOutlet weak var doingTableView: UITableView!
     
@@ -77,14 +76,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let multiplier = 1.0 / CGFloat(todos.count + 5)
             
-            cell.backgroundColor = UIColor(red: 0, green: 0, blue: 255, alpha: CGFloat(indexPath.row + 5) * multiplier / 1.0)
+            cell.backgroundColor = UIColor(red: 0, green: 0, blue: 255, alpha: 1.0 - CGFloat(indexPath.row + 5) * multiplier / 1.0)
             
             cell.textField.text = todos[indexPath.row] as! String
-
-//        let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.todocellview", forIndexPath: indexPath) as! ToDoTableViewCell
-        
-        
-        cell.textField.text = todos[indexPath.row] as! String
 
             return cell
         } else if (tableView == doingTableView) {
@@ -92,7 +86,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let multiplier = 1.0 / CGFloat(todos.count + 5)
             
-            cell.backgroundColor = UIColor(red:1.0, green:0.75, blue:0.72, alpha: CGFloat(indexPath.row + 5) * multiplier / 1.0)
+            cell.backgroundColor = UIColor(red:1.0, green:0.75, blue:0.72, alpha: 1.0 - CGFloat(indexPath.row + 5) * multiplier / 1.0)
             
             cell.textField.text = doing[indexPath.row] as! String
             
@@ -122,11 +116,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         if (scrollView == containerScrollView) {
             
-            let pageWidth = scrollView.frame.size.width
-            let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
-            
-            pageControl.currentPage = page
-            print (page)
         }
         
         
