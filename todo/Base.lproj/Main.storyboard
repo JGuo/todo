@@ -13,18 +13,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="1125" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" currentPage="1" id="zXY-kj-ul0">
-                                <rect key="frame" x="0.0" y="610" width="1125" height="37"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <color key="pageIndicatorTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </pageControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" id="NLB-7d-szf">
-                                <rect key="frame" x="0.0" y="0.0" width="1125" height="667"/>
+                            <view contentMode="scaleToFill" id="cJ4-DO-Xst">
+                                <rect key="frame" x="0.0" y="586" width="375" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="naW-gh-KFn" userLabel="todo">
+                                        <rect key="frame" x="22" y="0.0" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="drawer"/>
+                                        <state key="selected" image="drawer_select"/>
+                                        <connections>
+                                            <action selector="tapTodoTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hbI-3O-UDB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IRg-55-pzd" userLabel="doing">
+                                        <rect key="frame" x="147" y="0.0" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="focus"/>
+                                        <state key="selected" image="focus_select"/>
+                                        <connections>
+                                            <action selector="tapDoingTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0o2-aw-CCS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HyD-fV-BN3" userLabel="done">
+                                        <rect key="frame" x="272" y="0.0" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="egg"/>
+                                        <state key="selected" image="egg_select"/>
+                                        <connections>
+                                            <action selector="tapDoneTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xeq-fT-VYn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Rig-jf-DpT" appends="YES" id="ypN-lA-2VQ"/>
+                                </connections>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="NLB-7d-szf">
+                                <rect key="frame" x="0.0" y="0.0" width="1125" height="586"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" id="Yzp-2K-3WI">
+                                        <rect key="frame" x="666" y="62" width="300" height="524"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.1144965361" green="1" blue="0.082518505980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oEY-nU-tD4">
-                                        <rect key="frame" x="412" y="72" width="300" height="524"/>
+                                        <rect key="frame" x="352" y="62" width="300" height="524"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -42,13 +79,8 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="hnU-Ff-CdM"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" id="Yzp-2K-3WI">
-                                        <rect key="frame" x="731" y="72" width="300" height="524"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.1144965361" green="1" blue="0.082518505980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
                                     <view contentMode="scaleToFill" id="nQC-zi-hYP">
-                                        <rect key="frame" x="92" y="72" width="300" height="524"/>
+                                        <rect key="frame" x="38" y="62" width="300" height="524"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
@@ -61,16 +93,31 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1125" height="667"/>
                     <connections>
+                        <outlet property="doingTab" destination="IRg-55-pzd" id="cCK-gy-N2x"/>
+                        <outlet property="doneTab" destination="HyD-fV-BN3" id="z5E-Zw-Wbd"/>
                         <outlet property="leftCard" destination="nQC-zi-hYP" id="8XJ-Ty-Eh6"/>
-                        <outlet property="pageControl" destination="zXY-kj-ul0" id="fuM-46-GYn"/>
                         <outlet property="rightCard" destination="Yzp-2K-3WI" id="jkM-cF-mxQ"/>
                         <outlet property="scrollView" destination="NLB-7d-szf" id="V0q-ki-SSm"/>
                         <outlet property="tableView" destination="oEY-nU-tD4" id="Rn0-2p-QW3"/>
+                        <outlet property="todoTab" destination="naW-gh-KFn" id="ceq-eM-49F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Rig-jf-DpT">
+                    <connections>
+                        <action selector="tabBarDidPan:" destination="BYZ-38-t0r" id="llt-Ld-84b"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="116.5" y="359.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="drawer" width="25" height="25"/>
+        <image name="drawer_select" width="25" height="25"/>
+        <image name="egg" width="25" height="25"/>
+        <image name="egg_select" width="25" height="25"/>
+        <image name="focus" width="25" height="25"/>
+        <image name="focus_select" width="25" height="25"/>
+    </resources>
 </document>
