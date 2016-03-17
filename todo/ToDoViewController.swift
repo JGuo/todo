@@ -52,6 +52,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+<<<<<<< Updated upstream
         var cell : UITableViewCell!
         
         if (tableView == todoTableView) {
@@ -62,6 +63,17 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.backgroundColor = UIColor(red: CGFloat(indexPath.row + 5) * multiplier / 255.0, green: 0, blue: 0, alpha: 1.0)
             
             cell.textField.text = todos[indexPath.row] as! String
+=======
+        let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.todocellview", forIndexPath: indexPath) as! ToDoTableViewCell
+        
+        let multiplier = 1.0 / CGFloat(todos.count + 5)
+        
+//        cell.backgroundColor = UIColor(red: CGFloat(indexPath.row + 5) * multiplier / 255.0, green: 191, blue: 183, alpha: 1.0)
+        
+        cell.backgroundColor = UIColor(red:1.0, green:0.75, blue:0.72, alpha: CGFloat(indexPath.row + 5) * multiplier / 1.0)
+        
+        cell.textField.text = todos[indexPath.row] as! String
+>>>>>>> Stashed changes
 
             return cell
         } else if (tableView == doingTableView) {
