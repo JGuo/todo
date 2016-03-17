@@ -12,17 +12,20 @@ let ROW_HEIGHT = CGFloat(70)
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var containerScrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var todoTableView: UITableView!
+    @IBOutlet weak var doingTableView: UITableView!
     
     var todos : NSArray!
+    var doing : NSArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        scrollView.contentSize = CGSize(width: 3 * 375, height: self.view.frame.height)
+        containerScrollView.delegate = self
+        containerScrollView.contentSize = CGSize(width: 3 * 375, height: self.view.frame.height)
         
         todos = [   "Learn",
                     "Coffee",
@@ -35,27 +38,56 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                     "Submit",
                     "Coffee",
                 ]
+        
+        doing = [   "Work",
+                    "Play",
+                    "Work",
+                    "Play",
+                    "Work",
+                ]
     
-        // Hide the new cell, so that it's only revealed on scroll
-        tableView.contentInset.top = -ROW_HEIGHT
+        // Hide the top cell, so that it's only revealed on scroll
+        todoTableView.contentInset.top = -ROW_HEIGHT
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.todocellview", forIndexPath: indexPath) as! ToDoTableViewCell
+        var cell : UITableViewCell!
         
-        let multiplier = 255.0 / CGFloat(todos.count + 5)
-        
-        cell.backgroundColor = UIColor(red: CGFloat(indexPath.row + 5) * multiplier / 255.0, green: 0, blue: 0, alpha: 1.0)
-        
-        cell.textField.text = todos[indexPath.row] as! String
+        if (tableView == todoTableView) {
+            let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.todocellview", forIndexPath: indexPath) as! ToDoTableViewCell
+            
+            let multiplier = 255.0 / CGFloat(todos.count + 5)
+            
+            cell.backgroundColor = UIColor(red: CGFloat(indexPath.row + 5) * multiplier / 255.0, green: 0, blue: 0, alpha: 1.0)
+            
+            cell.textField.text = todos[indexPath.row] as! String
 
+            return cell
+        } else if (tableView == doingTableView) {
+            let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.doingcellview", forIndexPath: indexPath) as! DoingTableViewCell
+            
+            let multiplier = 255.0 / CGFloat(todos.count + 5)
+            
+            cell.backgroundColor = UIColor(red: 0, green: CGFloat(indexPath.row + 5) * multiplier / 255.0, blue: 0, alpha: 1.0)
+            
+            cell.textField.text = doing[indexPath.row] as! String
+            
+            return cell
+        }
+        
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return todos.count
+        if (tableView == todoTableView) {
+            return todos.count
+        } else if (tableView == doingTableView) {
+            return doing.count
+        }
+        
+        return 5
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -64,19 +96,31 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-     
-        // When you scroll to the top of the scroll view, catch the New cell and leave it on screen
-        if (tableView.contentOffset.y <= 0) {
+
+        if (scrollView == containerScrollView) {
             
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            let pageWidth = scrollView.frame.size.width
+            let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
+            
+            pageControl.currentPage = page
+            print (page)
+        }
+        
+        
+        if (scrollView == todoTableView) {
+         // When you scroll to the top of the scroll view, catch the New cell and leave it on screen
+            if (todoTableView.contentOffset.y <= 0) {
                 
-                self.tableView.contentInset.top = 0
-                },  completion: { (finished) -> Void in
-              
-                    let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as! ToDoTableViewCell
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
                     
-                    cell.textField!.becomeFirstResponder()
-            })
+                    self.todoTableView.contentInset.top = 0
+                    },  completion: { (finished) -> Void in
+                  
+                        let cell = self.todoTableView.cellForRowAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as! ToDoTableViewCell
+                        
+                        cell.textField!.becomeFirstResponder()
+                })
+            }
         }
     }
     

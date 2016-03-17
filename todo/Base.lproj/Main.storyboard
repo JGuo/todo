@@ -17,18 +17,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1125" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" id="nQC-zi-hYP">
-                                        <rect key="frame" x="60" y="72" width="300" height="524"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="Yzp-2K-3WI">
-                                        <rect key="frame" x="787" y="72" width="300" height="524"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.1144965361" green="1" blue="0.082518505980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oEY-nU-tD4">
-                                        <rect key="frame" x="412" y="72" width="300" height="524"/>
+                                        <rect key="frame" x="37.5" y="72" width="300" height="524"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -57,6 +47,41 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="hnU-Ff-CdM"/>
                                         </connections>
                                     </tableView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="a5n-At-Kvd">
+                                        <rect key="frame" x="412" y="72" width="300" height="524"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="com.todo.doingcellview" rowHeight="70" id="x1V-XJ-On5" customClass="DoingTableViewCell" customModule="todo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="300" height="70"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x1V-XJ-On5" id="8ZJ-Tx-beg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="69.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" id="hBz-s4-9UQ">
+                                                            <rect key="frame" x="8" y="20" width="284" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="textField" destination="hBz-s4-9UQ" id="Thi-QU-evj"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="2ha-sj-XdD"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="0vy-OB-PFI"/>
+                                        </connections>
+                                    </tableView>
+                                    <view contentMode="scaleToFill" id="Yzp-2K-3WI">
+                                        <rect key="frame" x="787" y="72" width="300" height="524"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.1144965361" green="1" blue="0.082518505980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" currentPage="1" id="zXY-kj-ul0">
@@ -71,9 +96,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1125" height="667"/>
                     <connections>
+                        <outlet property="containerScrollView" destination="NLB-7d-szf" id="tRy-PY-Ody"/>
+                        <outlet property="doingTableView" destination="a5n-At-Kvd" id="lgn-BS-C71"/>
                         <outlet property="pageControl" destination="zXY-kj-ul0" id="fuM-46-GYn"/>
-                        <outlet property="scrollView" destination="NLB-7d-szf" id="V0q-ki-SSm"/>
-                        <outlet property="tableView" destination="oEY-nU-tD4" id="Rn0-2p-QW3"/>
+                        <outlet property="todoTableView" destination="oEY-nU-tD4" id="12n-Bh-PiA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
