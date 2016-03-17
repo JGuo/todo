@@ -41,6 +41,7 @@
                                                         </textField>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <gestureRecognizers/>
                                                 <connections>
                                                     <outlet property="textField" destination="cac-5D-FWF" id="g0a-vG-kdh"/>
                                                 </connections>
