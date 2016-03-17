@@ -13,7 +13,6 @@ let ROW_HEIGHT = CGFloat(70)
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var containerScrollView: UIScrollView!
-    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var todoTableView: UITableView!
     @IBOutlet weak var doingTableView: UITableView!
     
@@ -99,10 +98,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         if (scrollView == containerScrollView) {
             
-            let pageWidth = scrollView.frame.size.width
-            let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
-            
-            pageControl.currentPage = page
         }
         
         
