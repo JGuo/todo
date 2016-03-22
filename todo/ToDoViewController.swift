@@ -10,7 +10,7 @@ import UIKit
 
 let ROW_HEIGHT = CGFloat(70)
 
-class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     @IBOutlet weak var containerScrollView: UIScrollView!
     @IBOutlet weak var todoTableView: UITableView!
@@ -131,7 +131,42 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                 })
             }
         }
+        
+        if (scrollView == containerScrollView) {
+        }
     }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if (scrollView == containerScrollView) {
+            print("DONE scrolling")
+            if (pageNumber == 0) {
+                
+                if (self.containerScrollView.contentOffset.x < self.view.frame.width / 2.0) {
+                    selectTodoTab(false)
+                } else {
+                    
+                    selectDoingTab()
+                }
+            } else if (pageNumber == 1) {
+                
+                if (self.containerScrollView.contentOffset.x < 38 + 300 + 7) {
+                    selectTodoTab(false)
+                } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
+                    selectDoneTab(false)
+                } else {
+                    selectDoingTab()
+                }
+            } else if (pageNumber == 2) {
+                
+                if (self.containerScrollView.contentOffset.x > self.containerScrollView.contentSize.width - self.view.window!.frame.width) {
+                    selectDoneTab(false)
+                } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
+                    self.selectDoingTab()
+                }
+            }
+        }
+    }
+    
     
     //    CODE FOR TAB BAR BUTTONS
     
@@ -243,6 +278,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         doneTab.selected = true
         pageNumber = 2
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
