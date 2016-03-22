@@ -133,22 +133,25 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         if (scrollView == containerScrollView) {
+            
         }
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        NSLog("DONE SCROLLING!: %@", decelerate)
         if (scrollView == containerScrollView) {
             print("DONE scrolling")
             if (pageNumber == 0) {
-                
-                if (self.containerScrollView.contentOffset.x < self.view.frame.width / 2.0) {
+                print("started on first card")
+                if (self.containerScrollView.contentOffset.x < self.view.frame.width / 3.0) {
+                    print("go back")
                     selectTodoTab(false)
                 } else {
-                    
+                    print("go to doing")
                     selectDoingTab()
                 }
             } else if (pageNumber == 1) {
-                
+                print("started on second card")
                 if (self.containerScrollView.contentOffset.x < 38 + 300 + 7) {
                     selectTodoTab(false)
                 } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
@@ -157,7 +160,40 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                     selectDoingTab()
                 }
             } else if (pageNumber == 2) {
-                
+                print("started on third card")
+                if (self.containerScrollView.contentOffset.x > self.containerScrollView.contentSize.width - self.view.window!.frame.width) {
+                    selectDoneTab(false)
+                } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
+                    self.selectDoingTab()
+                }
+            }
+        }
+    }
+    
+    func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+        if (scrollView == containerScrollView) {
+            print("DONE scrolling")
+            scrollView.setContentOffset(scrollView.contentOffset, animated: false)
+            if (pageNumber == 0) {
+                print("started on first card")
+                if (self.containerScrollView.contentOffset.x < self.view.frame.width / 3.0) {
+                    print("go back")
+                    selectTodoTab(false)
+                } else {
+                    print("go to doing")
+                    selectDoingTab()
+                }
+            } else if (pageNumber == 1) {
+                print("started on second card")
+                if (self.containerScrollView.contentOffset.x < 38 + 300 + 7) {
+                    selectTodoTab(false)
+                } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
+                    selectDoneTab(false)
+                } else {
+                    selectDoingTab()
+                }
+            } else if (pageNumber == 2) {
+                print("started on third card")
                 if (self.containerScrollView.contentOffset.x > self.containerScrollView.contentSize.width - self.view.window!.frame.width) {
                     selectDoneTab(false)
                 } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
