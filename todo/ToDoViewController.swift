@@ -17,6 +17,14 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var doingTableView: UITableView!
     
     @IBOutlet weak var rightCard: UIView!
+    @IBOutlet weak var tamagotchiView: UIView!
+    @IBOutlet weak var boobieView: UIView!
+    @IBOutlet weak var cloud1: UIImageView!
+    @IBOutlet weak var cloud2: UIImageView!
+    @IBOutlet weak var eyesView: UIImageView!
+    @IBOutlet weak var shadow: UIImageView!
+    @IBOutlet weak var bodyView: UIImageView!
+    @IBOutlet weak var mouthView: UIImageView!
     
     @IBOutlet weak var tabBarView: UIView!
     @IBOutlet weak var todoTab: UIButton!
@@ -28,6 +36,12 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var todos : NSArray!
     var doing : NSArray!
+    
+    //eyes animation
+    var images: [UIImage]!
+    var animatedImage: UIImage!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +56,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         todoTableView.layer.cornerRadius = 10;
         doingTableView.layer.cornerRadius = 10;
         rightCard.layer.cornerRadius = 10;
+        
+     
+        
         
         todos = [   "Learn",
                     "Coffee",
@@ -67,7 +84,56 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         todoTab.selected = true
         pageNumber = 0
+        
+        
+        // Right Card
+        
+        //Eye animation
+        let eyeOpen = UIImage(named: "eyes")!
+        let eyeClose = UIImage(named: "eyes_close")!
+        let eyeImages = [eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeOpen, eyeClose]
+        let animatedImage = UIImage.animatedImageWithImages(eyeImages, duration: 3.0)
+        eyesView.image = animatedImage
+        
+        //Body animation
+        let body1 = UIImage(named: "body1")!
+        let body2 = UIImage(named: "body2")!
+        let bodyImages = [body1, body2]
+        let animatedBodyImage = UIImage.animatedImageWithImages(bodyImages, duration: 1.0)
+        bodyView.image = animatedBodyImage
+        
+        //Character floating animation
+        UIView.animateWithDuration(0.8, delay: 0.0,
+            // Autoreverse runs the animation backwards and Repeat cycles the animation indefinitely.
+            options: [UIViewAnimationOptions.Autoreverse,
+                UIViewAnimationOptions.Repeat], animations: { () -> Void in
+                    self.boobieView.transform = CGAffineTransformMakeTranslation(0, 10)
+            }, completion: nil)
+        
+        UIView.animateWithDuration(0.8, delay: 0.0,
+            // Autoreverse runs the animation backwards and Repeat cycles the animation indefinitely.
+            options: [UIViewAnimationOptions.Autoreverse,
+                UIViewAnimationOptions.Repeat], animations: { () -> Void in
+                    self.shadow.transform = CGAffineTransformMakeScale(0.7,1)
+                    self.shadow.alpha = 0.5
+            }, completion: nil)
+        
+        //Cloud animation
+        UIView.animateWithDuration(5, delay: 0.0,
+            // Autoreverse runs the animation backwards and Repeat cycles the animation indefinitely.
+            options: [UIViewAnimationOptions.Autoreverse,
+                UIViewAnimationOptions.Repeat], animations: { () -> Void in
+                    self.cloud1.transform = CGAffineTransformMakeTranslation(30, -30)
+                    self.cloud2.transform = CGAffineTransformMakeTranslation(-30, 30)
+                    self.cloud1.alpha = 0.2
+                    self.cloud2.alpha = 0.2
+            }, completion: nil)
+
+        
+        
     }
+ 
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -301,6 +367,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
+    
+   
     
 }
 
