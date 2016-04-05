@@ -64,7 +64,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="300" height="70"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x1V-XJ-On5" id="8ZJ-Tx-beg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="69.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" id="hBz-s4-9UQ">
@@ -94,7 +94,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="300" height="70"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T3Z-AF-w0A" id="ces-UJ-jek">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="69.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" id="cac-5D-FWF">
