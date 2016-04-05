@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DoingTableViewCell: UITableViewCell {
+class DoingTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
     
@@ -27,7 +27,8 @@ class DoingTableViewCell: UITableViewCell {
         let recognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
         recognizer.delegate = self
         addGestureRecognizer(recognizer)
-
+        
+        textField.delegate = self
     }
     
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -92,12 +93,23 @@ class DoingTableViewCell: UITableViewCell {
                         },
                         completion: { (finished) -> Void in
                             
+                            let myIndex = self.todoViewController.doingTableView.indexPathForCell(self)
+                            self.todoViewController.doing.removeObjectAtIndex((myIndex?.row)!)
+                            self.todoViewController.doingTableView.reloadData()
+
+                            
                             self.todoViewController.selectDoneTab(true)
                             self.todoViewController.chew()
                     })
                 }
             }
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.endEditing(true)
+        return true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
