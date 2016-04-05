@@ -29,7 +29,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var eatImage: UIImageView!
     @IBOutlet weak var chewImage: UIImageView!
     
-    @IBOutlet weak var eatLabel: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     var currentScore: Int!
     var totalScore: Int!
@@ -55,7 +54,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBAction func tapScore(sender: UIButton) {
-        print("tapped score")
         self.addScore(1)
     }
     
@@ -157,7 +155,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func addScore(i: Int) {
-        print("adding score")
         currentScore = Int(scoreLabel.text!)
         totalScore = currentScore + i
         scoreLabel.text = String(totalScore)
@@ -298,7 +295,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         if (scrollView == containerScrollView) {
-            print("DONE scrolling")
             scrollToPage()
         }
     }
@@ -306,7 +302,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
         if (scrollView == containerScrollView) {
-            print("DONE scrolling")
             scrollView.setContentOffset(scrollView.contentOffset, animated: false)
             scrollToPage()
         }
@@ -332,8 +327,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func tabBarDidPan(sender: UIPanGestureRecognizer) {
         let translation = sender.translationInView(view)
-        
-        print(translation)
         
         if (sender.state == UIGestureRecognizerState.Began) {
             initialScrollViewContentOffset = containerScrollView.contentOffset
@@ -398,16 +391,16 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func scrollToPage() {
         if (pageNumber == 0) {
-            print("started on first card")
+
             if (self.containerScrollView.contentOffset.x < self.view.frame.width / 6.0) {
-                print("go back")
+
                 selectTodoTab(false)
             } else {
-                print("go to doing")
+
                 selectDoingTab()
             }
         } else if (pageNumber == 1) {
-            print("started on second card")
+
             if (self.containerScrollView.contentOffset.x < 38 + 300 + 7) {
                 selectTodoTab(false)
             } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
@@ -416,7 +409,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                 selectDoingTab()
             }
         } else if (pageNumber == 2) {
-            print("started on third card")
+
             if (self.containerScrollView.contentOffset.x > self.containerScrollView.contentSize.width - self.view.window!.frame.width) {
                 selectDoneTab(false)
             } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
@@ -455,43 +448,48 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func eatDidPan(sender: UIPanGestureRecognizer) {
+    func chew() {
         chewImage.hidden = false
         mouthView.hidden = true
         eatImage.hidden = false
         
-        if sender.state == UIGestureRecognizerState.Began {
-            delay(0.3) {
-                self.eatImage.hidden = true
-              }
-            
-            
-            UIView.animateWithDuration(0.2, delay: 0.0,
-                options: [UIViewAnimationOptions.Autoreverse,
-                    UIViewAnimationOptions.Repeat,UIViewAnimationOptions.AllowUserInteraction], animations: { () -> Void in
-                        self.eatImage.transform = CGAffineTransformMakeScale(1.8, 1.8)
-                }, completion: {(finished) -> Void in
-                    self.eatImage.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            })
         
-    
-            
-        } else if sender.state == UIGestureRecognizerState.Changed {
-            UIView.animateWithDuration(0.2, delay: 0.0,
-                options: [UIViewAnimationOptions.Autoreverse,
-                    UIViewAnimationOptions.Repeat,UIViewAnimationOptions.AllowUserInteraction], animations: { () -> Void in
-                        self.chewImage.transform = CGAffineTransformMakeScale(1.2, 0.5)
-                }, completion: nil)
-            
-            
-        } else if sender.state == UIGestureRecognizerState.Ended {
-            delay(3){
-                self.chewImage.hidden = true
-                self.mouthView.hidden = false
-                self.eatImage.hidden = true
-            }
+        
+        delay(0.3) {
+            self.eatImage.hidden = true
+            self.addScore(1)
         }
         
+        UIView.animateWithDuration(0.2,
+            delay: 0.1,
+            options: [UIViewAnimationOptions.Autoreverse,
+                    UIViewAnimationOptions.Repeat,UIViewAnimationOptions.AllowUserInteraction],
+            animations: { () -> Void in
+                
+                self.eatImage.transform = CGAffineTransformMakeScale(1.8, 1.8)
+            },
+            completion: {(finished) -> Void in
+                self.eatImage.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                
+                self.addScore(1)
+            })
+    
+        
+        
+        UIView.animateWithDuration(0.2,
+            delay: 0.0,
+            options: [UIViewAnimationOptions.Autoreverse,
+                    UIViewAnimationOptions.Repeat, UIViewAnimationOptions.AllowUserInteraction],
+            animations: { () -> Void in
+                self.chewImage.transform = CGAffineTransformMakeScale(1.2, 0.5)
+            },
+            completion: nil)
+            
+        
+        delay(3) {
+            self.chewImage.hidden = true
+            self.mouthView.hidden = false
+            self.eatImage.hidden = true
+        }
     }
-
 }

@@ -51,7 +51,7 @@
                                     <outletCollection property="gestureRecognizers" destination="Rig-jf-DpT" appends="YES" id="ypN-lA-2VQ"/>
                                 </connections>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="NLB-7d-szf">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="NLB-7d-szf">
                                 <rect key="frame" x="0.0" y="0.0" width="1004" height="586"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -174,14 +174,6 @@
                                                         <rect key="frame" x="75" y="400" width="150" height="25"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pvq-D3-NEZ">
-                                                        <rect key="frame" x="191" y="20" width="101" height="76"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" title="Score"/>
-                                                        <connections>
-                                                            <action selector="tapScore:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LKi-cX-Dyo"/>
-                                                        </connections>
-                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ztn-vw-4Bj">
                                                         <rect key="frame" x="85" y="35" width="131" height="45"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -189,15 +181,6 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5yq-3k-1zf">
-                                                        <rect key="frame" x="35" y="48" width="30" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <gestureRecognizers/>
-                                                        <state key="normal" title="Eat"/>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="tqz-t5-nsR" appends="YES" id="Y5g-66-P4v"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                             </view>
                                         </subviews>
@@ -228,7 +211,6 @@
                         <outlet property="doingTableView" destination="a5n-At-Kvd" id="lgn-BS-C71"/>
                         <outlet property="doneTab" destination="HyD-fV-BN3" id="z5E-Zw-Wbd"/>
                         <outlet property="eatImage" destination="W8J-s1-72t" id="ou3-p3-mSp"/>
-                        <outlet property="eatLabel" destination="5yq-3k-1zf" id="Qqw-i9-prA"/>
                         <outlet property="eyesView" destination="6s0-5a-S5n" id="qYM-5U-oPN"/>
                         <outlet property="mouthView" destination="9bJ-7K-hb7" id="JHR-de-KMx"/>
                         <outlet property="rightCard" destination="Yzp-2K-3WI" id="jkM-cF-mxQ"/>

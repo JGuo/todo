@@ -93,8 +93,7 @@ class DoingTableViewCell: UITableViewCell {
                         completion: { (finished) -> Void in
                             
                             self.todoViewController.selectDoneTab(true)
-                            self.todoViewController.addScore(1)
-                            self.todoViewController.tapBoobie()
+                            self.todoViewController.chew()
                     })
                 }
             }
