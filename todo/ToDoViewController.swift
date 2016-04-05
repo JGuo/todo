@@ -26,6 +26,10 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var bodyView: UIImageView!
     @IBOutlet weak var mouthView: UIImageView!
     
+    @IBOutlet weak var scoreLabel: UILabel!
+    var currentScore: Int!
+    var totalScore: Int!
+    
     @IBOutlet weak var tabBarView: UIView!
     @IBOutlet weak var todoTab: UIButton!
     @IBOutlet weak var doingTab: UIButton!
@@ -42,6 +46,10 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     var animatedImage: UIImage!
     
     
+    @IBAction func tapScore(sender: UIButton) {
+        print("tapped score")
+        self.addScore(1)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +140,22 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
     }
- 
+    
+    func addScore(i: Int) {
+        print("adding score")
+        currentScore = Int(scoreLabel.text!)
+        totalScore = currentScore + i
+        scoreLabel.text = String(totalScore)
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -246,6 +269,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let translation = sender.translationInView(view)
         
+        print(translation)
+        
         if (sender.state == UIGestureRecognizerState.Began) {
             initialScrollViewContentOffset = containerScrollView.contentOffset
             
@@ -254,31 +279,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             containerScrollView.contentOffset.x = initialScrollViewContentOffset.x - translation.x
             
         }  else if (sender.state == UIGestureRecognizerState.Ended) {
-            if (pageNumber == 0) {
-                
-                if (self.containerScrollView.contentOffset.x < self.view.frame.width / 2.0) {
-                    selectTodoTab(false)
-                } else {
-                    
-                    selectDoingTab()
-                }
-            } else if (pageNumber == 1) {
-             
-                if (self.containerScrollView.contentOffset.x < 38 + 300 + 7) {
-                    selectTodoTab(false)
-                } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
-                    selectDoneTab(false)
-                } else {
-                    selectDoingTab()
-                }
-            } else if (pageNumber == 2) {
-                
-                if (self.containerScrollView.contentOffset.x > self.containerScrollView.contentSize.width - self.view.window!.frame.width) {
-                    selectDoneTab(false)
-                } else if (self.rightCard.frame.origin.x > self.containerScrollView.contentSize.width - 38 - 300 - 7) {
-                    self.selectDoingTab()
-                }
-            }
+            scrollToPage()
         }
     }
     
@@ -334,7 +335,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     func scrollToPage() {
         if (pageNumber == 0) {
             print("started on first card")
-            if (self.containerScrollView.contentOffset.x < self.view.frame.width / 3.0) {
+            if (self.containerScrollView.contentOffset.x < self.view.frame.width / 6.0) {
                 print("go back")
                 selectTodoTab(false)
             } else {
@@ -359,8 +360,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
