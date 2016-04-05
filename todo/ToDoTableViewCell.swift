@@ -12,6 +12,9 @@ class ToDoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var textField: UITextField!
     
+    weak var todoViewController: ToDoViewController!
+    weak var tableView: UITableView!
+    
     var initialCenter : CGPoint!
     var initialFrame : CGRect!
     var deleteOnRelease = false

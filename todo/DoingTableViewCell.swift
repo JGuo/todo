@@ -12,6 +12,9 @@ class DoingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var textField: UITextField!
     
+    weak var todoViewController: ToDoViewController!
+    weak var tableView: UITableView!
+    
     var initialCenter : CGPoint!
     var initialFrame : CGRect!
     var todoOnRelease = false
@@ -70,7 +73,16 @@ class DoingTableViewCell: UITableViewCell {
                 if !doneOnRelease {
                     UIView.animateWithDuration(0.2, animations: { self.frame = self.initialFrame })
                 } else {
-                    UIView.animateWithDuration(0.2, animations: { self.frame = CGRectMake(self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height) })
+                    UIView.animateWithDuration(0.2,
+                        animations: { () -> Void in
+                            self.frame = CGRectMake(self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
+                        },
+                        completion: { (finished) -> Void in
+                            
+                            self.todoViewController.selectDoneTab(true)
+                            self.todoViewController.addScore(1)
+                            // animate boobie
+                    })
                 }
             }
         }

@@ -165,6 +165,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (tableView == todoTableView) {
             let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.todocellview", forIndexPath: indexPath) as! ToDoTableViewCell
             
+            cell.tableView = todoTableView
+            cell.todoViewController = self
+            
             let multiplier = 1.0 / CGFloat(todos.count + 5)
             
             cell.backgroundColor = UIColor(red:0.51, green:0.77, blue:0.9, alpha:1.0 - CGFloat(indexPath.row + 5) * multiplier / 1.0)
@@ -174,6 +177,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else if (tableView == doingTableView) {
             let cell = tableView.dequeueReusableCellWithIdentifier("com.todo.doingcellview", forIndexPath: indexPath) as! DoingTableViewCell
+
+            cell.tableView = doingTableView
+            cell.todoViewController = self
             
             let multiplier = 1.0 / CGFloat(todos.count + 5)
             
