@@ -26,7 +26,10 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var bodyView: UIImageView!
     @IBOutlet weak var mouthView: UIImageView!
     @IBOutlet weak var angryImage: UIImageView!
+    @IBOutlet weak var eatImage: UIImageView!
+    @IBOutlet weak var chewImage: UIImageView!
     
+    @IBOutlet weak var eatLabel: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     var currentScore: Int!
     var totalScore: Int!
@@ -100,6 +103,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Right Card
         
         angryImage.hidden = true
+        chewImage.hidden = true
+        eatImage.hidden = true
 
         
         //Eye animation
@@ -449,5 +454,44 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
         }
     }
-}
+    
+    @IBAction func eatDidPan(sender: UIPanGestureRecognizer) {
+        chewImage.hidden = false
+        mouthView.hidden = true
+        eatImage.hidden = false
+        
+        if sender.state == UIGestureRecognizerState.Began {
+            delay(0.3) {
+                self.eatImage.hidden = true
+              }
+            
+            
+            UIView.animateWithDuration(0.2, delay: 0.0,
+                options: [UIViewAnimationOptions.Autoreverse,
+                    UIViewAnimationOptions.Repeat,UIViewAnimationOptions.AllowUserInteraction], animations: { () -> Void in
+                        self.eatImage.transform = CGAffineTransformMakeScale(1.8, 1.8)
+                }, completion: {(finished) -> Void in
+                    self.eatImage.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            })
+        
+    
+            
+        } else if sender.state == UIGestureRecognizerState.Changed {
+            UIView.animateWithDuration(0.2, delay: 0.0,
+                options: [UIViewAnimationOptions.Autoreverse,
+                    UIViewAnimationOptions.Repeat,UIViewAnimationOptions.AllowUserInteraction], animations: { () -> Void in
+                        self.chewImage.transform = CGAffineTransformMakeScale(1.2, 0.5)
+                }, completion: nil)
+            
+            
+        } else if sender.state == UIGestureRecognizerState.Ended {
+            delay(3){
+                self.chewImage.hidden = true
+                self.mouthView.hidden = false
+                self.eatImage.hidden = true
+            }
+        }
+        
+    }
 
+}

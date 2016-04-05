@@ -220,12 +220,15 @@
                         <outlet property="angryImage" destination="cKj-Kt-1nJ" id="Gvw-0h-Krf"/>
                         <outlet property="bodyView" destination="8Ca-7e-K7O" id="i8Q-SW-Fwe"/>
                         <outlet property="boobieView" destination="drs-pk-MvA" id="GWZ-DW-nZc"/>
+                        <outlet property="chewImage" destination="Ueh-tD-EBa" id="Wem-q5-Wsj"/>
                         <outlet property="cloud1" destination="OUo-jq-FUc" id="zBP-Ll-MQg"/>
                         <outlet property="cloud2" destination="TCG-42-a8M" id="lhy-mE-oGa"/>
                         <outlet property="containerScrollView" destination="NLB-7d-szf" id="tRy-PY-Ody"/>
                         <outlet property="doingTab" destination="IRg-55-pzd" id="cCK-gy-N2x"/>
                         <outlet property="doingTableView" destination="a5n-At-Kvd" id="lgn-BS-C71"/>
                         <outlet property="doneTab" destination="HyD-fV-BN3" id="z5E-Zw-Wbd"/>
+                        <outlet property="eatImage" destination="W8J-s1-72t" id="ou3-p3-mSp"/>
+                        <outlet property="eatLabel" destination="5yq-3k-1zf" id="Qqw-i9-prA"/>
                         <outlet property="eyesView" destination="6s0-5a-S5n" id="qYM-5U-oPN"/>
                         <outlet property="mouthView" destination="9bJ-7K-hb7" id="JHR-de-KMx"/>
                         <outlet property="rightCard" destination="Yzp-2K-3WI" id="jkM-cF-mxQ"/>
@@ -250,7 +253,7 @@
                 </tapGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="tqz-t5-nsR">
                     <connections>
-                        <action selector="eatDidPan:" destination="BYZ-38-t0r" id="gDy-Ag-7jI"/>
+                        <action selector="eatDidPan:" destination="BYZ-38-t0r" id="E9H-kM-lkN"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
