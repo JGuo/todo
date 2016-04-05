@@ -427,7 +427,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             ),
             dispatch_get_main_queue(), closure)
     }
-
     
     //Tamagochi Tap Gesture 
     @IBAction func didTapBoobie(sender: UITapGestureRecognizer) {
