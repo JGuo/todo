@@ -55,37 +55,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1004" height="586"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="a5n-At-Kvd">
-                                        <rect key="frame" x="352" y="62" width="300" height="524"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="com.todo.doingcellview" rowHeight="70" id="x1V-XJ-On5" customClass="DoingTableViewCell" customModule="todo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="300" height="70"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x1V-XJ-On5" id="8ZJ-Tx-beg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="69.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" id="hBz-s4-9UQ">
-                                                            <rect key="frame" x="8" y="20" width="284" height="30"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
-                                                        </textField>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="textField" destination="hBz-s4-9UQ" id="Thi-QU-evj"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <connections>
-                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="2ha-sj-XdD"/>
-                                            <outlet property="delegate" destination="BYZ-38-t0r" id="0vy-OB-PFI"/>
-                                        </connections>
-                                    </tableView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="oEY-nU-tD4">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="oEY-nU-tD4">
                                         <rect key="frame" x="38" y="62" width="300" height="524"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -94,7 +64,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="300" height="70"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T3Z-AF-w0A" id="ces-UJ-jek">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="69.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" id="cac-5D-FWF">
@@ -114,6 +84,36 @@
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="KCe-Lk-73O"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="hnU-Ff-CdM"/>
+                                        </connections>
+                                    </tableView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="a5n-At-Kvd">
+                                        <rect key="frame" x="352" y="62" width="300" height="524"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="com.todo.doingcellview" rowHeight="70" id="x1V-XJ-On5" customClass="DoingTableViewCell" customModule="todo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="300" height="70"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x1V-XJ-On5" id="8ZJ-Tx-beg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" id="hBz-s4-9UQ">
+                                                            <rect key="frame" x="8" y="20" width="284" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="textField" destination="hBz-s4-9UQ" id="Thi-QU-evj"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="2ha-sj-XdD"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="0vy-OB-PFI"/>
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" id="Yzp-2K-3WI">

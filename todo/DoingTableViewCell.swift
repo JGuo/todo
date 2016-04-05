@@ -25,6 +25,18 @@ class DoingTableViewCell: UITableViewCell {
         recognizer.delegate = self
         addGestureRecognizer(recognizer)
     }
+    
+    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+
+        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = panGestureRecognizer.translationInView(superview!)
+            if fabs(translation.x) > fabs(translation.y) {
+                return true
+            }
+            return false
+        }
+        return false
+    }
 
     func handlePan(recognizer: UIPanGestureRecognizer!) {
         let translation = recognizer.translationInView(self)

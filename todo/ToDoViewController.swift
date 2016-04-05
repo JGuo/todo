@@ -26,8 +26,12 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var initialScrollViewContentOffset: CGPoint!
     
-    var todos : NSArray!
-    var doing : NSArray!
+    var todos : NSMutableArray!
+    var doing : NSMutableArray!
+    
+    var pullToCreate : Bool!
+    var placeholderToDo : ToDoTableViewCell!
+    var placeholderDoing : DoingTableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,11 +66,10 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                     "Work",
                 ]
         
-        // Hide the top cell, so that it's only revealed on scroll
-        todoTableView.contentInset.top = -ROW_HEIGHT
-        
         todoTab.selected = true
         pageNumber = 0
+        
+        pullToCreate = false
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -104,9 +107,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             return todos.count
         } else if (tableView == doingTableView) {
             return doing.count
+        } else {
+            return 0
         }
-        
-        return 5
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -114,49 +117,109 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         return ROW_HEIGHT
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         if (scrollView == todoTableView) {
-            // When you scroll to the top of the scroll view, catch the New cell and leave it on screen
-            if (todoTableView.contentOffset.y <= 0) {
+            
+            if (todoTableView.contentOffset.y <= 0.0) {
                 
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    
-                    self.todoTableView.contentInset.top = 0
-                    },  completion: { (finished) -> Void in
-                        
-                        let cell = self.todoTableView.cellForRowAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as! ToDoTableViewCell
-                        
-                        cell.textField!.becomeFirstResponder()
-                })
+                todos.insertObject("Pull to add item" as String, atIndex: 0)
+                todoTableView.reloadData()
+            }
+        }
+        
+        if (scrollView == doingTableView) {
+            
+            if (doingTableView.contentOffset.y <= 0.0) {
+                
+                doing.insertObject("Pull to add item" as String, atIndex: 0)
+                doingTableView.reloadData()
             }
         }
     }
     
-    //    CODE FOR TAB BAR BUTTONS
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        // When you scroll to the top of the scroll view, catch the New cell and leave it on screen
+        var scrollViewContentOffsetY = scrollView.contentOffset.y
+        
+        if (pullToCreate == false) {
+            pullToCreate = scrollViewContentOffsetY <= -ROW_HEIGHT
+        }
+        
+        if (scrollView == todoTableView) {
+            if (placeholderToDo == nil) {
+                placeholderToDo = todoTableView.dequeueReusableCellWithIdentifier("com.todo.todocellview") as! ToDoTableViewCell
+            }
+            
+            placeholderToDo.textLabel!.text = pullToCreate == true ? "Release to add item" : "Pull to add item"
+        }
+        
+        if (scrollView == doingTableView) {
+            if (placeholderDoing == nil) {
+                placeholderDoing = doingTableView.dequeueReusableCellWithIdentifier("com.todo.doingcellview") as! DoingTableViewCell
+            }
+            
+            placeholderDoing.textLabel!.text = pullToCreate == true ? "Release to add item" : "Pull to add item"
+
+        }
+        
+    }
     
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if (pullToCreate == true) {
+            if (scrollView == todoTableView) {
+                todos.removeObjectAtIndex(0)
+                todos.insertObject("New", atIndex: 0)
+                todoTableView.reloadData()
+                
+                let cell = todoTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! ToDoTableViewCell
+                cell.textField.becomeFirstResponder()
+            }
+            
+            if (scrollView == doingTableView) {
+                doing.removeObjectAtIndex(0)
+                doing.insertObject("New", atIndex: 0)
+                doingTableView.reloadData()
+                
+                let cell = doingTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! DoingTableViewCell
+                cell.textField.becomeFirstResponder()
+            }
+            
+            pullToCreate = false
+            placeholderToDo = nil
+            placeholderDoing = nil
+        } else {
+
+            if (scrollView == todoTableView) {
+                todos.removeObjectAtIndex(0)
+                todoTableView.reloadData()
+            }
+            
+            if (scrollView == doingTableView) {
+                doing.removeObjectAtIndex(0)
+                doingTableView.reloadData()
+            }
+        }
+    }
+
+    //    CODE FOR TAB BAR BUTTONS
     @IBAction func tapTodoTab(sender: UIButton) {
-        print("tapped on todo tab")
         
         selectTodoTab(true)
     }
     
     @IBAction func tapDoingTab(sender: UIButton) {
-        print("tapped on doing tab")
         
         selectDoingTab()
     }
     
     
     @IBAction func tapDoneTab(sender: UIButton) {
-        print("tapped on done tab")
-        
+       
         selectDoneTab(true)
     }
     
     @IBAction func tabBarDidPan(sender: UIPanGestureRecognizer) {
-        print("did pan")
-        
         let translation = sender.translationInView(view)
         
         if (sender.state == UIGestureRecognizerState.Began) {
