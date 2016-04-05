@@ -63,7 +63,17 @@ class ToDoTableViewCell: UITableViewCell {
                 if !deleteOnRelease {
                     UIView.animateWithDuration(0.2, animations: { self.frame = self.initialFrame })
                 } else {
-                    UIView.animateWithDuration(0.2, animations: { self.frame = CGRectMake(-self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height) })
+                    UIView.animateWithDuration(0.2,
+                        animations: { () -> Void in
+                            self.frame = CGRectMake(-self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
+                        },
+                        completion: { (finished) -> Void in
+                            
+                            let myIndex = self.todoViewController.todoTableView.indexPathForCell(self)
+                            self.todoViewController.todos.removeObjectAtIndex((myIndex?.row)!)
+                            self.todoViewController.todoTableView.reloadData()
+                        }
+                    )
                 }
             }
             
@@ -71,7 +81,21 @@ class ToDoTableViewCell: UITableViewCell {
                 if !moveToDoingOnRelease {
                     UIView.animateWithDuration(0.2, animations: { self.frame = self.initialFrame })
                 } else {
-                    UIView.animateWithDuration(0.2, animations: { self.frame = CGRectMake(self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height) })
+                    
+                    UIView.animateWithDuration(0.2,
+                        animations: { () -> Void in
+                            self.frame = CGRectMake(self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
+                        },
+                        completion: { (finished) -> Void in
+                            
+                            self.todoViewController.doing.addObject(self.textField!.text!)
+                            self.todoViewController.doingTableView.reloadData()
+                            
+                            let myIndex = self.todoViewController.todoTableView.indexPathForCell(self)
+                            self.todoViewController.todos.removeObjectAtIndex((myIndex?.row)!)
+                            self.todoViewController.todoTableView.reloadData()
+                        }
+                    )
                 }
             }
         }

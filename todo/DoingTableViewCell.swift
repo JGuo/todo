@@ -65,7 +65,20 @@ class DoingTableViewCell: UITableViewCell {
                 if !todoOnRelease {
                     UIView.animateWithDuration(0.2, animations: { self.frame = self.initialFrame })
                 } else {
-                    UIView.animateWithDuration(0.2, animations: { self.frame = CGRectMake(-self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height) })
+                    UIView.animateWithDuration(0.2,
+                        animations: { () -> Void in
+                            self.frame = CGRectMake(-self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
+                        },
+                        completion: { (finished) -> Void in
+                            
+                            self.todoViewController.todos.addObject(self.textField!.text!)
+                            self.todoViewController.todoTableView.reloadData()
+                            
+                            let myIndex = self.todoViewController.doingTableView.indexPathForCell(self)
+                            self.todoViewController.doing.removeObjectAtIndex((myIndex?.row)!)
+                            self.todoViewController.doingTableView.reloadData()
+                        }
+                    )
                 }
             }
             
