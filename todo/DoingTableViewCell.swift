@@ -81,7 +81,7 @@ class DoingTableViewCell: UITableViewCell {
                             
                             self.todoViewController.selectDoneTab(true)
                             self.todoViewController.addScore(1)
-                            // animate boobie
+                            self.todoViewController.tapBoobie()
                     })
                 }
             }

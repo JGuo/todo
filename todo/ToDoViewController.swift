@@ -436,13 +436,17 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //Tamagochi Tap Gesture 
     @IBAction func didTapBoobie(sender: UITapGestureRecognizer) {
+        tapBoobie()
+    }
+    
+    func tapBoobie() {
         angryImage.hidden = false
         self.mouthView.transform = CGAffineTransformMakeScale(1.2,1.4)
-        
+    
         delay(0.2) {
             self.angryImage.hidden = true
             self.mouthView.transform = CGAffineTransformMakeScale(1,1)
-
+    
         }
     }
 }
