@@ -221,7 +221,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if (todoTableView.contentOffset.y <= 0.0) {                
                 
-                todos.insertObject("Pull to add item" as String, atIndex: 0)
+                todos.insertObject("" as String, atIndex: 0)
                 todoTableView.reloadData()
             }
         }
@@ -235,7 +235,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if (doingTableView.contentOffset.y <= 0.0) {
                 
-                doing.insertObject("Pull to add item" as String, atIndex: 0)
+                doing.insertObject("" as String, atIndex: 0)
                 doingTableView.reloadData()
             }
         }
@@ -248,23 +248,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if (pullToCreate == false) {
             pullToCreate = scrollViewContentOffsetY <= -ROW_HEIGHT
-            print(pullToCreate)
-        }
-        
-        if (scrollView == todoTableView) {
-            if (placeholderToDo == nil) {
-                placeholderToDo = todoTableView.dequeueReusableCellWithIdentifier("com.todo.todocellview") as! ToDoTableViewCell
-            }
-            
-            placeholderToDo.textLabel!.text = pullToCreate == true ? "Release to add item" : "Pull to add item"
-        }
-        
-        if (scrollView == doingTableView) {
-            if (placeholderDoing == nil) {
-                placeholderDoing = doingTableView.dequeueReusableCellWithIdentifier("com.todo.doingcellview") as! DoingTableViewCell
-            }
-            
-            placeholderDoing.textLabel!.text = pullToCreate == true ? "Release to add item" : "Pull to add item"
         }
     }
     
@@ -284,8 +267,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                 todos.removeObjectAtIndex(0)
                 todoTableView.reloadData()
             }
-
-            placeholderToDo = nil
         }
             
         if (scrollView == doingTableView) {
@@ -302,19 +283,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                 doing.removeObjectAtIndex(0)
                 doingTableView.reloadData()
             }
-            
-            placeholderDoing = nil
-        }
-        
-        if (scrollView == containerScrollView) {
-            scrollToPage()
-        }
-    }
-
-    func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
-        if (scrollView == containerScrollView) {
-            scrollView.setContentOffset(scrollView.contentOffset, animated: false)
-            scrollToPage()
         }
     }
     
