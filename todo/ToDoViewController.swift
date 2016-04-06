@@ -218,12 +218,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let customCell = cell as! ToDoTableViewCell
                 customCell.textField.endEditing(true)
             }
-            
-            if (todoTableView.contentOffset.y <= 0.0) {                
-                
-                todos.insertObject("" as String, atIndex: 0)
-                todoTableView.reloadData()
-            }
         }
         
         if (scrollView == doingTableView) {
@@ -231,12 +225,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             for cell in doingTableView.visibleCells {
                 let customCell = cell as! DoingTableViewCell
                 customCell.textField.endEditing(true)
-            }
-            
-            if (doingTableView.contentOffset.y <= 0.0) {
-                
-                doing.insertObject("" as String, atIndex: 0)
-                doingTableView.reloadData()
             }
         }
     }
@@ -251,11 +239,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         if (scrollView == todoTableView) {
             if (pullToCreate == true) {
-                todos.removeObjectAtIndex(0)
                 todos.insertObject("", atIndex: 0)
                 todoTableView.reloadData()
                     
@@ -263,15 +249,11 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.textField.becomeFirstResponder()
 
                 pullToCreate = false
-            } else {
-                todos.removeObjectAtIndex(0)
-                todoTableView.reloadData()
             }
         }
             
         if (scrollView == doingTableView) {
             if (pullToCreate == true) {
-                doing.removeObjectAtIndex(0)
                 doing.insertObject("", atIndex: 0)
                 doingTableView.reloadData()
                 
@@ -279,9 +261,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.textField.becomeFirstResponder()
                 
                 pullToCreate = false
-            } else {
-                doing.removeObjectAtIndex(0)
-                doingTableView.reloadData()
             }
         }
     }
