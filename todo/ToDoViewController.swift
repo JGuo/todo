@@ -478,8 +478,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             },
             completion: {(finished) -> Void in
                 self.eatImage.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                
-                self.addScore(1)
             })
     
         
