@@ -112,6 +112,13 @@ class DoingTableViewCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
 
+    func textFieldDidEndEditing(textField: UITextField) {
+        let myIndex = self.todoViewController.doingTableView.indexPathForCell(self)
+        self.todoViewController.doing.removeObjectAtIndex((myIndex?.row)!)
+        self.todoViewController.doing.insertObject(textField.text!, atIndex: (myIndex?.row)!)
+        self.todoViewController.doingTableView.reloadData()
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

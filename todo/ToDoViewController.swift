@@ -214,7 +214,12 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         if (scrollView == todoTableView) {
             
-            if (todoTableView.contentOffset.y <= 0.0) {
+            for cell in todoTableView.visibleCells {
+                let customCell = cell as! ToDoTableViewCell
+                customCell.textField.endEditing(true)
+            }
+            
+            if (todoTableView.contentOffset.y <= 0.0) {                
                 
                 todos.insertObject("Pull to add item" as String, atIndex: 0)
                 todoTableView.reloadData()
@@ -222,6 +227,11 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         if (scrollView == doingTableView) {
+            
+            for cell in doingTableView.visibleCells {
+                let customCell = cell as! DoingTableViewCell
+                customCell.textField.endEditing(true)
+            }
             
             if (doingTableView.contentOffset.y <= 0.0) {
                 
@@ -238,6 +248,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if (pullToCreate == false) {
             pullToCreate = scrollViewContentOffsetY <= -ROW_HEIGHT
+            print(pullToCreate)
         }
         
         if (scrollView == todoTableView) {
@@ -254,7 +265,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             placeholderDoing.textLabel!.text = pullToCreate == true ? "Release to add item" : "Pull to add item"
-
         }
     }
     
@@ -263,7 +273,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (scrollView == todoTableView) {
             if (pullToCreate == true) {
                 todos.removeObjectAtIndex(0)
-                todos.insertObject("New", atIndex: 0)
+                todos.insertObject("", atIndex: 0)
                 todoTableView.reloadData()
                     
                 let cell = todoTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! ToDoTableViewCell
@@ -281,11 +291,13 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (scrollView == doingTableView) {
             if (pullToCreate == true) {
                 doing.removeObjectAtIndex(0)
-                doing.insertObject("New", atIndex: 0)
+                doing.insertObject("", atIndex: 0)
                 doingTableView.reloadData()
                 
                 let cell = doingTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! DoingTableViewCell
                 cell.textField.becomeFirstResponder()
+                
+                pullToCreate = false
             } else {
                 doing.removeObjectAtIndex(0)
                 doingTableView.reloadData()
@@ -299,7 +311,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    
     func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
         if (scrollView == containerScrollView) {
             scrollView.setContentOffset(scrollView.contentOffset, animated: false)
@@ -307,7 +318,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-
     //    CODE FOR TAB BAR BUTTONS
     @IBAction func tapTodoTab(sender: UIButton) {
         
@@ -452,8 +462,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         chewImage.hidden = false
         mouthView.hidden = true
         eatImage.hidden = false
-        
-        
         
         delay(0.3) {
             self.eatImage.hidden = true

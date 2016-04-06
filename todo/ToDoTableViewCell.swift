@@ -104,11 +104,17 @@ class ToDoTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-     
         textField.endEditing(true)
         return true
     }
-
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        let myIndex = self.todoViewController.todoTableView.indexPathForCell(self)
+        self.todoViewController.todos.removeObjectAtIndex((myIndex?.row)!)
+        self.todoViewController.todos.insertObject(textField.text!, atIndex: (myIndex?.row)!)
+        self.todoViewController.todoTableView.reloadData()
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
